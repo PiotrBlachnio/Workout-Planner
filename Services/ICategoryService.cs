@@ -10,5 +10,7 @@ namespace NotesAPI.Services {
         Category CreateCategory(string Name);
 
         bool DeleteCategory(int id);
+
+        bool UpdateCategory(int id);
     }
 }

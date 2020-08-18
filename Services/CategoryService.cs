@@ -33,5 +33,12 @@ namespace NotesAPI.Services {
             if(category == null) return false;
             return true;
         }
+
+        public bool UpdateCategory(int id) {
+            var category = categories.Find(x => x.Id == id);
+
+            if(category == null) return false;
+            return true;
+        }
     }
 }

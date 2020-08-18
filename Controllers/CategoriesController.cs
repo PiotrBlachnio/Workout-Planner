@@ -55,5 +55,13 @@ namespace NotesAPI.Controllers {
             if(isSuccess) return Ok();
             else return Unauthorized();
         }
+
+        [HttpPut(ApiRoutes.Category.Update)]
+        public ActionResult UpdateCategory([FromRoute] int id) {
+            var isSuccess = _categoryService.UpdateCategory(id);
+
+            if(isSuccess) return Ok();
+            else return Unauthorized();
+        }
     }
 }
