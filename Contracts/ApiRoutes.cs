@@ -7,6 +7,8 @@ namespace NotesAPI.Contracts {
         private const string Base = Root + "/" + Version;
 
         public static class Category {
+            public const string Get = Base + "/category/{id}";
+            
             public const string GetAll = Base + "/category";
 
             public const string Create = Base + "/category";

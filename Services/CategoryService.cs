@@ -3,8 +3,7 @@ using NotesAPI.Database.Models;
 
 namespace NotesAPI.Services {
     public class CategoryService : ICategoryService {
-        public List<Category> GetAllCategories()
-        {
+        public List<Category> GetAllCategories() {
             var categories = new List<Category> {
                 new Category{Id=0, Name="Programming", CreatedAt=Utils.GetCurrentDate() + 5000},
                 new Category{Id=1, Name="School", CreatedAt=Utils.GetCurrentDate() + 60605},
@@ -12,6 +11,11 @@ namespace NotesAPI.Services {
             };
 
             return categories;
+        }
+
+        public Category CreateCategory(string Name) {
+            var category = new Category{Id=0, Name=Name, CreatedAt=Utils.GetCurrentDate()};
+            return category;
         }
     }
 }
