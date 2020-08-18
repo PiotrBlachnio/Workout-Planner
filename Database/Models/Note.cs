@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace NotesAPI.Database.Models {
     public class Note {
         public int Id { get; set; }
