@@ -46,6 +46,14 @@ namespace NotesAPI.Controllers {
             var locationUrl = baseUrl + "/" + ApiRoutes.Category.Get.Replace("{id}", category.Id.ToString());
 
             return Created(locationUrl, mappedCategory);
-        } 
+        }
+
+        [HttpDelete(ApiRoutes.Category.Delete)]
+        public ActionResult DeleteCategory([FromRoute] int id) {
+            var isSuccess = _categoryService.DeleteCategory(id);
+
+            if(isSuccess) return Ok();
+            else return Unauthorized();
+        }
     }
 }

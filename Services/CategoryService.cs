@@ -26,5 +26,12 @@ namespace NotesAPI.Services {
             var category = new Category{Id=3, Name=Name, CreatedAt=Utils.GetCurrentDate()};
             return category;
         }
+
+        public bool DeleteCategory(int id) {
+            var category = categories.Find(x => x.Id == id);
+
+            if(category == null) return false;
+            return true;
+        }
     }
 }
