@@ -13,10 +13,5 @@ namespace NotesAPI.Services {
 
             return categories;
         }
-
-        public Category GetCategory(int id)
-        {
-            return new Category{Id=0, Name="Personal Documents", CreatedAt=Utils.GetCurrentDate()};
-        }
     }
 }

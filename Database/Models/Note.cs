@@ -7,8 +7,8 @@ namespace NotesAPI.Database.Models {
         public string Content { get; set; }
         public int CategoryId { get; set; }
         public List<string> Tags { get; set; }
-        public int CreatedAt { get; set; }
-        public int LastEditedAt { get; set; }
+        public long CreatedAt { get; set; }
+        public long LastEditedAt { get; set; }
         public int OwnerId { get; set; }
         public bool IsPrivate { get; set; }
     }
