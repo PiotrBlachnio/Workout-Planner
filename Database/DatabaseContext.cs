@@ -6,5 +6,6 @@ namespace NotesAPI.Database {
         public DatabaseContext(DbContextOptions<DatabaseContext> opt) : base(opt) {}
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Note> Notes { get; set; }
     }
 }

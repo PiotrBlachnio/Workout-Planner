@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotesAPI.Database.Models {
     public class Note {
@@ -15,6 +16,9 @@ namespace NotesAPI.Database.Models {
 
         [Required]
         public int CategoryId { get; set; }
+
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; }
 
         [DefaultValue(new string[] {})]
         public List<string> Tags { get; set; }
