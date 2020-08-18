@@ -1,16 +1,17 @@
+using System;
 using System.Collections.Generic;
 using NotesAPI.Database.Models;
 
 namespace NotesAPI.Services {
     public interface ICategoryService {
-        Category GetCategory(int id);
+        Category GetCategory(Guid id);
 
         List<Category> GetAllCategories();
 
         Category CreateCategory(string Name);
 
-        bool DeleteCategory(int id);
+        bool DeleteCategory(Guid id);
 
-        bool UpdateCategory(int id);
+        bool UpdateCategory(Guid id);
     }
 }

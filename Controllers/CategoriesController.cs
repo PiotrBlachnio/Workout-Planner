@@ -5,6 +5,7 @@ using AutoMapper;
 using System.Collections.Generic;
 using NotesAPI.Contracts.Responses;
 using NotesAPI.Contracts.Requests;
+using System;
 
 namespace NotesAPI.Controllers {
 
@@ -19,7 +20,7 @@ namespace NotesAPI.Controllers {
         }
 
         [HttpGet(ApiRoutes.Category.Get)]
-        public ActionResult GetCategory([FromRoute] int id) {
+        public ActionResult GetCategory([FromRoute] Guid id) {
             var category = _categoryService.GetCategory(id);
 
             var mappedCategory = _mapper.Map<CategoryResponse>(category);
@@ -49,7 +50,7 @@ namespace NotesAPI.Controllers {
         }
 
         [HttpDelete(ApiRoutes.Category.Delete)]
-        public ActionResult DeleteCategory([FromRoute] int id) {
+        public ActionResult DeleteCategory([FromRoute] Guid id) {
             var isSuccess = _categoryService.DeleteCategory(id);
 
             if(isSuccess) return Ok();
@@ -57,7 +58,7 @@ namespace NotesAPI.Controllers {
         }
 
         [HttpPut(ApiRoutes.Category.Update)]
-        public ActionResult UpdateCategory([FromRoute] int id) {
+        public ActionResult UpdateCategory([FromRoute] Guid id) {
             var isSuccess = _categoryService.UpdateCategory(id);
 
             if(isSuccess) return Ok();
