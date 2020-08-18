@@ -4,8 +4,6 @@ using NotesAPI.Contracts;
 using AutoMapper;
 using System.Collections.Generic;
 using NotesAPI.Contracts.Responses;
-using System;
-using System.Text.Json;
 using NotesAPI.Contracts.Requests;
 
 namespace NotesAPI.Controllers {
@@ -18,6 +16,15 @@ namespace NotesAPI.Controllers {
         public CategoriesController(ICategoryService categoryService, IMapper mapper) {
             _categoryService = categoryService;
             _mapper = mapper;
+        }
+
+        [HttpGet(ApiRoutes.Category.Get)]
+        public ActionResult GetCategory([FromRoute] int id) {
+            var category = _categoryService.GetCategory(id);
+
+            var mappedCategory = _mapper.Map<CategoryResponse>(category);
+
+            return Ok(mappedCategory);
         }
 
         [HttpGet(ApiRoutes.Category.GetAll)]
@@ -38,7 +45,7 @@ namespace NotesAPI.Controllers {
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
             var locationUrl = baseUrl + "/" + ApiRoutes.Category.Get.Replace("{id}", category.Id.ToString());
 
-            return Created(locationUrl, category);
+            return Created(locationUrl, mappedCategory);
         } 
     }
 }
