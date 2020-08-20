@@ -9,10 +9,10 @@ namespace NotesAPI.Services {
 
         Task<List<Category>> GetAllCategoriesAsync();
 
-        Task<Category> CreateCategoryAsync(string Name);
+        Task<bool> CreateCategoryAsync(Category category);
 
-        Task<bool> DeleteCategoryAsync(Guid id);
+        Task<bool> DeleteCategoryAsync(Category category);
 
-        Task<bool> UpdateCategoryAsync(Guid id);
+        Task<bool> UpdateCategoryAsync(Category category);
     }
 }
