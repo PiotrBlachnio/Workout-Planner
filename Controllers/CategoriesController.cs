@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using NotesAPI.Contracts.Responses;
 using NotesAPI.Contracts.Requests;
 using System;
+using System.Threading.Tasks;
+using NotesAPI.Database.Models;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace NotesAPI.Controllers {
 
@@ -20,49 +23,64 @@ namespace NotesAPI.Controllers {
         }
 
         [HttpGet(ApiRoutes.Category.Get)]
-        public ActionResult GetCategory([FromRoute] Guid id) {
-            var category = _categoryService.GetCategory(id);
+        public async Task<ActionResult> GetCategory([FromRoute] Guid id) {
+            var category = await _categoryService.GetCategoryAsync(id);
 
-            var mappedCategory = _mapper.Map<CategoryResponse>(category);
+            if(category == null) return NotFound();
 
-            return Ok(mappedCategory);
+            var output = _mapper.Map<CategoryResponse>(category);
+
+            return Ok(output);
         }
 
         [HttpGet(ApiRoutes.Category.GetAll)]
-        public ActionResult GetAllCategories() {
-            var categories = _categoryService.GetAllCategories();
-            
-            var mappedCategories = _mapper.Map<List<CategoryResponse>>(categories);
+        public async Task<ActionResult> GetAllCategories() {
+            var categories = await _categoryService.GetAllCategoriesAsync();
+            var output = _mapper.Map<List<CategoryResponse>>(categories);
 
-            return Ok(mappedCategories);
+            return Ok(output);
         }
 
         [HttpPost(ApiRoutes.Category.Create)]
-        public ActionResult CreateCategory([FromBody] CreateCategoryRequest input) {
-            var category = _categoryService.CreateCategory(input.Name);
+        public async Task<ActionResult> CreateCategory([FromBody] CreateCategoryRequest input) {
+            var category = _mapper.Map<Category>(input);
+            category.CreatedAt = Utils.GetCurrentDate();
 
-            var mappedCategory = _mapper.Map<CategoryResponse>(category);
+            await _categoryService.CreateCategoryAsync(category);
+
+            var output = _mapper.Map<CategoryResponse>(category);
 
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
             var locationUrl = baseUrl + "/" + ApiRoutes.Category.Get.Replace("{id}", category.Id.ToString());
 
-            return Created(locationUrl, mappedCategory);
+            return Created(locationUrl, output);
         }
 
         [HttpDelete(ApiRoutes.Category.Delete)]
-        public ActionResult DeleteCategory([FromRoute] Guid id) {
-            var isSuccess = _categoryService.DeleteCategory(id);
+        public async Task<ActionResult> DeleteCategory([FromRoute] Guid id) {
+            var category = await _categoryService.GetCategoryAsync(id);
 
-            if(isSuccess) return Ok();
-            else return Unauthorized();
+            if(category == null) return NotFound();
+
+            await _categoryService.DeleteCategoryAsync(category);
+
+            return NoContent();
         }
 
-        [HttpPut(ApiRoutes.Category.Update)]
-        public ActionResult UpdateCategory([FromRoute] Guid id) {
-            var isSuccess = _categoryService.UpdateCategory(id);
+        [HttpPatch(ApiRoutes.Category.Update)]
+        public async Task<ActionResult> UpdateCategory([FromRoute] Guid id, [FromBody] JsonPatchDocument<UpdateCategoryRequest> input) {
+            var category = await _categoryService.GetCategoryAsync(id);
 
-            if(isSuccess) return Ok();
-            else return Unauthorized();
+            if(category == null) return NotFound();
+
+            var categoryToPatch = _mapper.Map<UpdateCategoryRequest>(category);
+
+            input.ApplyTo(categoryToPatch, ModelState);
+            _mapper.Map(categoryToPatch, category);
+            
+            await _categoryService.UpdateCategoryAsync(category);
+            
+            return Ok();
         }
     }
 }

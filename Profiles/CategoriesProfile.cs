@@ -7,7 +7,12 @@ namespace NotesAPI.Profiles {
     public class CategoriesProfile : Profile {
         public CategoriesProfile() {
             CreateMap<Category, CategoryResponse>();
+
             CreateMap<CreateCategoryRequest, Category>();
+
+            CreateMap<UpdateCategoryRequest, Category>();
+
+            CreateMap<Category, UpdateCategoryRequest>();
         }
     }
 }

@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,13 +16,13 @@ namespace NotesAPI.Database.Models {
         public string Content { get; set; }
 
         [Required]
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; }
 
-        [DefaultValue(new string[] {})]
-        public List<string> Tags { get; set; }
+        [NotMapped]
+        public IEnumerable Tags { get; set; }
 
         [Required]
         public long CreatedAt { get; set; }
