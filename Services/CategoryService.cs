@@ -8,38 +8,10 @@ using NotesAPI.Database.Models;
 
 namespace NotesAPI.Services {
     public class CategoryService : ICategoryService {
-        private List<Category> categories;
         private readonly DatabaseContext _context;
 
         public CategoryService(DatabaseContext context) {
             _context = context;
-        }
-
-        public Category GetCategory(Guid id) {
-            return categories.SingleOrDefault(x => x.Id == id);
-        }
-
-        public List<Category> GetAllCategories() {
-            return categories;
-        }
-
-        public Category CreateCategory(string Name) {
-            var category = new Category{Id=Guid.NewGuid(), Name=Name, CreatedAt=Utils.GetCurrentDate()};
-            return category;
-        }
-
-        public bool DeleteCategory(Guid id) {
-            var category = categories.Find(x => x.Id == id);
-
-            if(category == null) return false;
-            return true;
-        }
-
-        public bool UpdateCategory(Guid id) {
-            var category = categories.Find(x => x.Id == id);
-
-            if(category == null) return false;
-            return true;
         }
 
         public async Task<Category> GetCategoryAsync(Guid id) {
