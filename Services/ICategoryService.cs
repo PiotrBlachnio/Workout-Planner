@@ -1,17 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using NotesAPI.Database.Models;
 
 namespace NotesAPI.Services {
     public interface ICategoryService {
-        Category GetCategory(Guid id);
+        Task<Category> GetCategoryAsync(Guid id);
 
-        List<Category> GetAllCategories();
+        Task<List<Category>> GetAllCategoriesAsync();
 
-        Category CreateCategory(string Name);
+        Task<Category> CreateCategoryAsync(string Name);
 
-        bool DeleteCategory(Guid id);
+        Task<bool> DeleteCategoryAsync(Guid id);
 
-        bool UpdateCategory(Guid id);
+        Task<bool> UpdateCategoryAsync(Guid id);
     }
 }
