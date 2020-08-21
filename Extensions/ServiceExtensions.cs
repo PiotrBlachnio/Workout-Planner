@@ -25,6 +25,7 @@ namespace WorkoutPlanner.Extensions {
         
         public static void AddServices(this IServiceCollection services) {
             services.AddScoped<IRoutineService, RoutineService>();
+            services.AddScoped<IExerciseService, ExerciseService>();
         }
     }
 }
