@@ -17,5 +17,17 @@ namespace WorkoutPlanner.Contracts {
 
             public const string Update = Base + "/routine/{id}";
         }
+
+        public static class Exercise {
+            public const string Get = Base + "/exercise/{id}";
+
+            public const string GetAll = Base + "/exercise";
+
+            public const string Create = Base + "/exercise";
+
+            public const string Delete = Base + "/exercise/{id}";
+
+            public const string Update = Base + "/exercise/{id}";
+        }
     }
 }
