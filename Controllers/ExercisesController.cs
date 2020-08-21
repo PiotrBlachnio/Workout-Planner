@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WorkoutPlanner.Contracts;
+using WorkoutPlanner.Contracts.Responses;
 using WorkoutPlanner.Services;
 
 namespace WorkoutPlanner.Controllers {
@@ -19,13 +21,14 @@ namespace WorkoutPlanner.Controllers {
             _mapper = mapper;
         }
 
-        [HttpGet(ApiRoutes.Exercise.Get)]
+        [HttpGet(ApiRoutes.Exercise.GetAll)]
         public async Task<ActionResult> GetExercises([FromQuery] Guid routineId) {
             var routine = await _routineService.GetRoutineAsync(routineId);
 
             if(routine == null) return NotFound(new { message = "Routine does not exist" });
 
             var exercises = await _exerciseService.GetAllExercisesAsync(routineId);
+            var output = _mapper.Map<List<ExerciseResponse>>(exercises);
 
             return Ok(output);
         }
