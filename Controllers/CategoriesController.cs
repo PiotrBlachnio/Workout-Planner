@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using NotesAPI.Database.Models;
 using Microsoft.AspNetCore.JsonPatch;
+using NotesAPI.Utils;
 
 namespace NotesAPI.Controllers {
 
@@ -44,7 +45,7 @@ namespace NotesAPI.Controllers {
         [HttpPost(ApiRoutes.Category.Create)]
         public async Task<ActionResult> CreateCategory([FromBody] CreateCategoryRequest input) {
             var category = _mapper.Map<Category>(input);
-            category.CreatedAt = Utils.GetCurrentDate();
+            category.CreatedAt = DateUtils.GetCurrentDate();
 
             await _categoryService.CreateCategoryAsync(category);
 
