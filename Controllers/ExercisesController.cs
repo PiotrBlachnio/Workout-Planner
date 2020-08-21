@@ -21,6 +21,17 @@ namespace WorkoutPlanner.Controllers {
             _mapper = mapper;
         }
 
+        [HttpGet(ApiRoutes.Exercise.Get)]
+        public async Task<ActionResult> GetExercise([FromRoute] Guid id) {
+            var exercise = await _exerciseService.GetExerciseAsync(id);
+
+            if(exercise == null) return NotFound();
+
+            var output = _mapper.Map<ExerciseResponse>(exercise);
+
+            return Ok(output);
+        }
+
         [HttpGet(ApiRoutes.Exercise.GetAll)]
         public async Task<ActionResult> GetExercises([FromQuery] Guid routineId) {
             var routine = await _routineService.GetRoutineAsync(routineId);
