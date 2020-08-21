@@ -6,26 +6,16 @@ namespace WorkoutPlanner.Contracts {
 
         private const string Base = Root + "/" + Version;
 
-        public static class Category {
-            public const string Get = Base + "/category/{id}";
+        public static class Routine {
+            public const string Get = Base + "/routine/{id}";
             
-            public const string GetAll = Base + "/category";
+            public const string GetAll = Base + "/routine";
 
-            public const string Create = Base + "/category";
+            public const string Create = Base + "/routine";
 
-            public const string Delete = Base + "/category/{id}";
+            public const string Delete = Base + "/routine/{id}";
 
-            public const string Update = Base + "/category/{id}";
-        }
-
-        public static class Note {
-            public const string GetAll = Base + "/note";
-
-            public const string Create = Base + "/note";
-
-            public const string Delete = Base + "/note/{id}";
-
-            public const string Update = Base + "/note/{id}";
+            public const string Update = Base + "/routine/{id}";
         }
     }
 }
