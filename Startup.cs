@@ -1,15 +1,10 @@
-using System;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json.Serialization;
-using NotesAPI.Database;
-using NotesAPI.Services;
+using NotesAPI.Extensions;
 
 namespace NotesAPI
 {
@@ -24,14 +19,13 @@ namespace NotesAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("NotesAPIConnection")));
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.ConfigureDatabase(Configuration);
 
-            services.AddControllers().AddNewtonsoftJson(s => {
-                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            });
+            services.ConfigureAutoMapper();
 
-            services.AddScoped<ICategoryService, CategoryService>();
+            services.ConfigureControllers();
+
+            services.AddServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,8 +38,6 @@ namespace NotesAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
