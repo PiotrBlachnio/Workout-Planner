@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace WorkoutPlanner.Database.Models {
-    public class Category {
+    public class Routine {
         [Key]
         public Guid Id { get; set; }
         
