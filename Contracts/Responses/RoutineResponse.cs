@@ -6,6 +6,8 @@ namespace WorkoutPlanner.Contracts.Responses {
         
         public string Name { get; set; }
 
+        public int ExercisesNumber { get; set; }
+
         public long CreatedAt { get; set; }
     }
 }

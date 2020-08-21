@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace WorkoutPlanner.Database.Models {
@@ -8,6 +9,9 @@ namespace WorkoutPlanner.Database.Models {
         
         [Required]
         public string Name { get; set; }
+        
+        [DefaultValue(0)]
+        public int ExercisesNumber { get; set; }
         
         [Required]
         public long CreatedAt { get; set; }
