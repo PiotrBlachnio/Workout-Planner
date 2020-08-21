@@ -1,4 +1,4 @@
-namespace NotesAPI.Contracts {
+namespace WorkoutPlanner.Contracts {
     public static class ApiRoutes {
         private const string Root = "api";
 

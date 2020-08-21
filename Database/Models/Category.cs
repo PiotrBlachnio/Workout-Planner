@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace NotesAPI.Database.Models {
+namespace WorkoutPlanner.Database.Models {
     public class Category {
         [Key]
         public Guid Id { get; set; }

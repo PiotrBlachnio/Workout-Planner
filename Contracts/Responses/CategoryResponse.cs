@@ -1,6 +1,6 @@
 using System;
 
-namespace NotesAPI.Contracts.Responses {
+namespace WorkoutPlanner.Contracts.Responses {
     public class CategoryResponse {
         public Guid Id { get; set; }
         

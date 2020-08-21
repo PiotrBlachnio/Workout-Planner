@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace NotesAPI.Middlewares {
+namespace WorkoutPlanner.Middlewares {
     public class ErrorDetails {
         public string message { get; set; }
 

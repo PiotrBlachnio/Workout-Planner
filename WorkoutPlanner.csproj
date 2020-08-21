@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>NotesAPI</RootNamespace>
+    <RootNamespace>WorkoutPlanner</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

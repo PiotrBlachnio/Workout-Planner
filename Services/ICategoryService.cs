@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NotesAPI.Database.Models;
+using WorkoutPlanner.Database.Models;
 
-namespace NotesAPI.Services {
+namespace WorkoutPlanner.Services {
     public interface ICategoryService {
         Task<Category> GetCategoryAsync(Guid id);
 

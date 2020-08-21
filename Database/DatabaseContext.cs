@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using NotesAPI.Database.Models;
+using WorkoutPlanner.Database.Models;
 
-namespace NotesAPI.Database {
+namespace WorkoutPlanner.Database {
     public class DatabaseContext : DbContext {
         public DatabaseContext(DbContextOptions<DatabaseContext> opt) : base(opt) {}
 

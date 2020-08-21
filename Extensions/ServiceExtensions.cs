@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
-using NotesAPI.Database;
-using NotesAPI.Services;
+using WorkoutPlanner.Database;
+using WorkoutPlanner.Services;
 
-namespace NotesAPI.Extensions {
+namespace WorkoutPlanner.Extensions {
     public static class ServiceExtensions {
         public static void ConfigureDatabase(this IServiceCollection services, IConfiguration configuration) {
-            services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("NotesAPIConnection")));
+            services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("WorkoutPlannerConnection")));
         }
 
         public static void ConfigureAutoMapper(this IServiceCollection services) {

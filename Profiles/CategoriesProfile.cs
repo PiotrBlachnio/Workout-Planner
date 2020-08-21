@@ -1,9 +1,9 @@
 using AutoMapper;
-using NotesAPI.Contracts.Requests;
-using NotesAPI.Contracts.Responses;
-using NotesAPI.Database.Models;
+using WorkoutPlanner.Contracts.Requests;
+using WorkoutPlanner.Contracts.Responses;
+using WorkoutPlanner.Database.Models;
 
-namespace NotesAPI.Profiles {
+namespace WorkoutPlanner.Profiles {
     public class CategoriesProfile : Profile {
         public CategoriesProfile() {
             CreateMap<Category, CategoryResponse>();

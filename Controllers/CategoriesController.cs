@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
-using NotesAPI.Services;
-using NotesAPI.Contracts;
+using WorkoutPlanner.Services;
+using WorkoutPlanner.Contracts;
 using AutoMapper;
 using System.Collections.Generic;
-using NotesAPI.Contracts.Responses;
-using NotesAPI.Contracts.Requests;
+using WorkoutPlanner.Contracts.Responses;
+using WorkoutPlanner.Contracts.Requests;
 using System;
 using System.Threading.Tasks;
-using NotesAPI.Database.Models;
+using WorkoutPlanner.Database.Models;
 using Microsoft.AspNetCore.JsonPatch;
-using NotesAPI.Utils;
+using WorkoutPlanner.Utils;
 
-namespace NotesAPI.Controllers {
+namespace WorkoutPlanner.Controllers {
 
     [ApiController]
     public class CategoriesController : ControllerBase {

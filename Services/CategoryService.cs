@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using NotesAPI.Database;
-using NotesAPI.Database.Models;
+using WorkoutPlanner.Database;
+using WorkoutPlanner.Database.Models;
 
-namespace NotesAPI.Services {
+namespace WorkoutPlanner.Services {
     public class CategoryService : ICategoryService {
         private readonly DatabaseContext _context;
 
