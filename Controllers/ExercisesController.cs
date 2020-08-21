@@ -4,8 +4,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WorkoutPlanner.Contracts;
+using WorkoutPlanner.Contracts.Requests;
 using WorkoutPlanner.Contracts.Responses;
+using WorkoutPlanner.Database.Models;
 using WorkoutPlanner.Services;
+using WorkoutPlanner.Utils;
 
 namespace WorkoutPlanner.Controllers {
     
@@ -45,15 +48,17 @@ namespace WorkoutPlanner.Controllers {
         }
 
         [HttpPost(ApiRoutes.Exercise.Create)]
-        public async Task<ActionResult> CreateExercise([FromQuery] Guid routineId) {
-            var routine = await _routineService.GetRoutineAsync(routineId);
+        public async Task<ActionResult> CreateExercise([FromBody] CreateExerciseRequest input) {
+            var exercise = _mapper.Map<Exercise>(input);
+            exercise.CreatedAt = DateUtils.GetCurrentDate();
 
-            if(routine == null) return NotFound(new { message = "Routine does not exist" });
+            await _exerciseService.CreateExerciseAsync(exercise);
+            var output = _mapper.Map<ExerciseResponse>(exercise);
 
-            var exercises = await _exerciseService.GetAllExercisesAsync(routineId);
-            var output = _mapper.Map<List<ExerciseResponse>>(exercises);
+            var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+            var locationUrl = baseUrl + "/" + ApiRoutes.Exercise.Get.Replace("{id}", exercise.Id.ToString());
 
-            return Ok(output);
+            return Created(locationUrl, output);
         }
     }
 }

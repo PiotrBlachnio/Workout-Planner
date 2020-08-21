@@ -7,6 +7,8 @@ namespace WorkoutPlanner.Profiles {
     public class ExerciseProfile : Profile {
         public ExerciseProfile() {
             CreateMap<Exercise, ExerciseResponse>();
+
+            CreateMap<CreateExerciseRequest, Exercise>();
         }
     }
 }
