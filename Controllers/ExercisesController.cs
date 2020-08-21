@@ -52,6 +52,13 @@ namespace WorkoutPlanner.Controllers {
             var exercise = _mapper.Map<Exercise>(input);
             exercise.CreatedAt = DateUtils.GetCurrentDate();
 
+            var routine = await _routineService.GetRoutineAsync(exercise.RoutineId);
+
+            if(routine == null) return NotFound();
+
+            routine.ExercisesNumber++;
+            await _routineService.UpdateRoutineAsync(routine);
+
             await _exerciseService.CreateExerciseAsync(exercise);
             var output = _mapper.Map<ExerciseResponse>(exercise);
 
@@ -59,6 +66,22 @@ namespace WorkoutPlanner.Controllers {
             var locationUrl = baseUrl + "/" + ApiRoutes.Exercise.Get.Replace("{id}", exercise.Id.ToString());
 
             return Created(locationUrl, output);
+        }
+
+        [HttpDelete(ApiRoutes.Exercise.Delete)]
+        public async Task<ActionResult> DeleteExercise([FromRoute] Guid id) {
+            var exercise = await _exerciseService.GetExerciseAsync(id);
+            if(exercise == null) return NotFound();
+
+            var routine = await _routineService.GetRoutineAsync(exercise.RoutineId);
+            routine.ExercisesNumber--;
+
+            if(routine == null) return NotFound();
+
+            await _routineService.UpdateRoutineAsync(routine);
+            await _exerciseService.DeleteExerciseAsync(exercise);
+        
+            return NoContent();
         }
     }
 }
