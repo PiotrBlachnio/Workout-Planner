@@ -9,6 +9,10 @@ namespace WorkoutPlanner.Profiles {
             CreateMap<Exercise, ExerciseResponse>();
 
             CreateMap<CreateExerciseRequest, Exercise>();
+
+            CreateMap<UpdateExerciseRequest, Exercise>();
+
+            CreateMap<Exercise, UpdateExerciseRequest>();
         }
     }
 }

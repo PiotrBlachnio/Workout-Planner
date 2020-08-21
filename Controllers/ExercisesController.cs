@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using WorkoutPlanner.Contracts;
 using WorkoutPlanner.Contracts.Requests;
@@ -82,6 +83,21 @@ namespace WorkoutPlanner.Controllers {
             await _exerciseService.DeleteExerciseAsync(exercise);
         
             return NoContent();
+        }
+
+        [HttpPatch(ApiRoutes.Exercise.Update)]
+        public async Task<ActionResult> UpdateExercise([FromRoute] Guid id, [FromBody] JsonPatchDocument<UpdateExerciseRequest> input) {
+            var exercise = await _exerciseService.GetExerciseAsync(id);
+            if(exercise == null) return NotFound();
+
+            var exerciseToPatch = _mapper.Map<UpdateExerciseRequest>(exercise);
+
+            input.ApplyTo(exerciseToPatch, ModelState);
+            _mapper.Map(exerciseToPatch, exercise);
+        
+            await _exerciseService.UpdateExerciseAsync(exercise);
+
+            return Ok();
         }
     }
 }
