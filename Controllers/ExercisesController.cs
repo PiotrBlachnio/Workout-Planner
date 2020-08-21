@@ -43,5 +43,17 @@ namespace WorkoutPlanner.Controllers {
 
             return Ok(output);
         }
+
+        [HttpPost(ApiRoutes.Exercise.Create)]
+        public async Task<ActionResult> CreateExercise([FromQuery] Guid routineId) {
+            var routine = await _routineService.GetRoutineAsync(routineId);
+
+            if(routine == null) return NotFound(new { message = "Routine does not exist" });
+
+            var exercises = await _exerciseService.GetAllExercisesAsync(routineId);
+            var output = _mapper.Map<List<ExerciseResponse>>(exercises);
+
+            return Ok(output);
+        }
     }
 }
