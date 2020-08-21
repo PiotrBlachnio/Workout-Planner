@@ -5,7 +5,7 @@ namespace WorkoutPlanner.Database {
     public class DatabaseContext : DbContext {
         public DatabaseContext(DbContextOptions<DatabaseContext> opt) : base(opt) {}
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Note> Notes { get; set; }
+        public DbSet<Routine> Routines { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
     }
 }
