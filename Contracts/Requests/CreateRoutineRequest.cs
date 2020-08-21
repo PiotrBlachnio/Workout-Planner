@@ -1,7 +1,5 @@
 namespace WorkoutPlanner.Contracts.Requests {
-    public class UpdateCategoryRequest {
+    public class CreateRoutineRequest {
         public string Name { get; set; }
-        
-        public long CreatedAt { get; set; }
     }
 }

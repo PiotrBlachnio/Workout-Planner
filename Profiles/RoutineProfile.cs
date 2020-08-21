@@ -6,13 +6,13 @@ using WorkoutPlanner.Database.Models;
 namespace WorkoutPlanner.Profiles {
     public class CategoriesProfile : Profile {
         public CategoriesProfile() {
-            CreateMap<Category, CategoryResponse>();
+            CreateMap<Routine, RoutineResponse>();
 
-            CreateMap<CreateCategoryRequest, Category>();
+            CreateMap<CreateRoutineRequest, Routine>();
 
-            CreateMap<UpdateCategoryRequest, Category>();
+            CreateMap<UpdateRoutineRequest, Routine>();
 
-            CreateMap<Category, UpdateCategoryRequest>();
+            CreateMap<Routine, UpdateRoutineRequest>();
         }
     }
 }
