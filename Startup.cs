@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NotesAPI.Extensions;
+using NotesAPI.Middlewares;
 
 namespace NotesAPI
 {
@@ -34,6 +35,8 @@ namespace NotesAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 
