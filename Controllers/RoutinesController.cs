@@ -19,6 +19,7 @@ namespace WorkoutPlanner.Controllers {
         private readonly IRoutineService _routineService;
         private readonly IExerciseService _exerciseService;
         private readonly IMapper _mapper;
+        private readonly RoutineValidator _routineValidator = new RoutineValidator();
 
         public RoutinesController(IRoutineService routineService, IExerciseService exerciseService, IMapper mapper) {
             _routineService = routineService;
@@ -50,9 +51,7 @@ namespace WorkoutPlanner.Controllers {
             var routine = _mapper.Map<Routine>(input);
             routine.CreatedAt = DateUtils.GetCurrentDate();
 
-            var validator = new RoutineValidator();
-            var results = validator.Validate(routine);
-
+            _routineValidator.Validate(routine);
             await _routineService.CreateRoutineAsync(routine);
 
             var output = _mapper.Map<RoutineResponse>(routine);
@@ -89,6 +88,7 @@ namespace WorkoutPlanner.Controllers {
             input.ApplyTo(routineToPatch, ModelState);
             _mapper.Map(routineToPatch, routine);
             
+           _routineValidator.Validate(routine);
             await _routineService.UpdateRoutineAsync(routine);
             
             return Ok();

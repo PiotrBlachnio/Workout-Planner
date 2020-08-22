@@ -10,6 +10,8 @@ using System;
  *
  *? Exercise errors
  * 200 - Exercise does not exist
+ * 201 - Exercise's name cannot be empty
+ * 202 - Exercise's name is too long
  */
  
 namespace WorkoutPlanner.Errors {
