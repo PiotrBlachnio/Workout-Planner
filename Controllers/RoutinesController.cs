@@ -11,6 +11,7 @@ using WorkoutPlanner.Database.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using WorkoutPlanner.Utils;
 using WorkoutPlanner.Errors;
+using WorkoutPlanner.Database.Validators;
 
 namespace WorkoutPlanner.Controllers {
 
@@ -48,6 +49,16 @@ namespace WorkoutPlanner.Controllers {
         public async Task<ActionResult> CreateRoutine([FromBody] CreateRoutineRequest input) {
             var routine = _mapper.Map<Routine>(input);
             routine.CreatedAt = DateUtils.GetCurrentDate();
+
+            var validator = new RoutineValidator();
+            var results = validator.Validate(routine);
+
+            // if(!results.IsValid) throw new GenericError(results.Errors[0].)
+            // Console.WriteLine(results.Errors[0].ErrorCode);
+            // Console.WriteLine(results.Errors[0].ErrorMessage);
+            Console.WriteLine(results.Errors[0].CustomState);
+
+            // throw results.Errors[0].CustomState as SystemException;
 
             await _routineService.CreateRoutineAsync(routine);
 
