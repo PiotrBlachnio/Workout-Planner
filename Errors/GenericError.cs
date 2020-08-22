@@ -5,7 +5,8 @@ using System;
  * 
  * 100 - Routine does not exist
  * 101 - Exercise does not exist
- * 102 - Routine cannot be empty
+ * 102 - Routine's name cannot be empty
+ * 103 - Routine's name is too long
  */
  
 namespace WorkoutPlanner.Errors {

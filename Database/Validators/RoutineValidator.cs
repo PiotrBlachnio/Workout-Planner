@@ -5,7 +5,9 @@ using WorkoutPlanner.Errors;
 namespace WorkoutPlanner.Database.Validators {
     public class RoutineValidator : AbstractValidator<Routine> {
         public RoutineValidator() {
-            RuleFor(routine => routine.Name).NotEmpty().WithState(state => throw new EmptyRoutineError());
+            RuleFor(routine => routine.Name)
+                .NotEmpty().WithState(state => throw new EmptyRoutineNameError())
+                .MaximumLength(16).WithState(state => throw new TooLongRoutineNameError());
         }
     }
 }

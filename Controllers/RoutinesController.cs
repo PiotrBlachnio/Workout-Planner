@@ -53,13 +53,6 @@ namespace WorkoutPlanner.Controllers {
             var validator = new RoutineValidator();
             var results = validator.Validate(routine);
 
-            // if(!results.IsValid) throw new GenericError(results.Errors[0].)
-            // Console.WriteLine(results.Errors[0].ErrorCode);
-            // Console.WriteLine(results.Errors[0].ErrorMessage);
-            Console.WriteLine(results.Errors[0].CustomState);
-
-            // throw results.Errors[0].CustomState as SystemException;
-
             await _routineService.CreateRoutineAsync(routine);
 
             var output = _mapper.Map<RoutineResponse>(routine);
