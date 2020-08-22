@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WorkoutPlanner.Database.Models {
     public class Exercise {
@@ -8,9 +7,6 @@ namespace WorkoutPlanner.Database.Models {
         public Guid Id { get; set; }
         
         public Guid RoutineId { get; set; }
-
-        [ForeignKey(nameof(RoutineId))]
-        public Routine Routine { get; set; }
 
         public string Name { get; set; }
         

@@ -8,6 +8,7 @@ using WorkoutPlanner.Contracts;
 using WorkoutPlanner.Contracts.Requests;
 using WorkoutPlanner.Contracts.Responses;
 using WorkoutPlanner.Database.Models;
+using WorkoutPlanner.Database.Validators;
 using WorkoutPlanner.Errors.Exercise;
 using WorkoutPlanner.Errors.Routine;
 using WorkoutPlanner.Services;
@@ -19,6 +20,7 @@ namespace WorkoutPlanner.Controllers {
         private readonly IExerciseService _exerciseService;
         private readonly IRoutineService _routineService;
         private readonly IMapper _mapper;
+        private readonly ExerciseValidator _exerciseValidator = new ExerciseValidator();
 
         public ExercisesController(IExerciseService exerciseService, IRoutineService routineService, IMapper mapper) {
             _exerciseService = exerciseService;
@@ -58,6 +60,8 @@ namespace WorkoutPlanner.Controllers {
 
             if(routine == null) throw new RoutineNotFoundError();;
 
+            _exerciseValidator.Validate(exercise);
+
             routine.ExercisesNumber++;
             await _routineService.UpdateRoutineAsync(routine);
 
@@ -93,8 +97,10 @@ namespace WorkoutPlanner.Controllers {
             var exerciseToPatch = _mapper.Map<UpdateExerciseRequest>(exercise);
 
             input.ApplyTo(exerciseToPatch, ModelState);
+        
             _mapper.Map(exerciseToPatch, exercise);
         
+            _exerciseValidator.Validate(exercise);
             await _exerciseService.UpdateExerciseAsync(exercise);
 
             return Ok();
