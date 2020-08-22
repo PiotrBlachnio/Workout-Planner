@@ -16,10 +16,12 @@ namespace WorkoutPlanner.Controllers {
     [ApiController]
     public class RoutinesController : ControllerBase {
         private readonly IRoutineService _routineService;
+        private readonly IExerciseService _exerciseService;
         private readonly IMapper _mapper;
 
-        public RoutinesController(IRoutineService routineService, IMapper mapper) {
+        public RoutinesController(IRoutineService routineService, IExerciseService exerciseService, IMapper mapper) {
             _routineService = routineService;
+            _exerciseService = exerciseService;
             _mapper = mapper;
         }
 
@@ -62,6 +64,12 @@ namespace WorkoutPlanner.Controllers {
             var routine = await _routineService.GetRoutineAsync(id);
 
             if(routine == null) return NotFound();
+
+            var exercises = await _exerciseService.GetAllExercisesAsync(id);
+
+            foreach(Exercise exercise in exercises) {
+                await _exerciseService.DeleteExerciseAsync(exercise);
+            }
 
             await _routineService.DeleteRoutineAsync(routine);
 
