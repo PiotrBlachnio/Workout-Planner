@@ -8,12 +8,12 @@ using WorkoutPlanner.Contracts;
 using WorkoutPlanner.Contracts.Requests;
 using WorkoutPlanner.Contracts.Responses;
 using WorkoutPlanner.Database.Models;
+using WorkoutPlanner.Errors;
 using WorkoutPlanner.Services;
 using WorkoutPlanner.Utils;
 
 namespace WorkoutPlanner.Controllers {
     
-    [ApiController]
     public class ExercisesController : ControllerBase {
         private readonly IExerciseService _exerciseService;
         private readonly IRoutineService _routineService;
@@ -29,7 +29,7 @@ namespace WorkoutPlanner.Controllers {
         public async Task<ActionResult> GetExercise([FromRoute] Guid id) {
             var exercise = await _exerciseService.GetExerciseAsync(id);
 
-            if(exercise == null) return NotFound();
+            if(exercise == null) throw new ExerciseNotFoundError();
 
             var output = _mapper.Map<ExerciseResponse>(exercise);
 
@@ -40,7 +40,7 @@ namespace WorkoutPlanner.Controllers {
         public async Task<ActionResult> GetExercises([FromQuery] Guid routineId) {
             var routine = await _routineService.GetRoutineAsync(routineId);
 
-            if(routine == null) return NotFound(new { message = "Routine does not exist" });
+            if(routine == null) throw new RoutineNotFoundError();
 
             var exercises = await _exerciseService.GetAllExercisesAsync(routineId);
             var output = _mapper.Map<List<ExerciseResponse>>(exercises);
@@ -55,7 +55,7 @@ namespace WorkoutPlanner.Controllers {
 
             var routine = await _routineService.GetRoutineAsync(exercise.RoutineId);
 
-            if(routine == null) return NotFound();
+            if(routine == null) throw new RoutineNotFoundError();;
 
             routine.ExercisesNumber++;
             await _routineService.UpdateRoutineAsync(routine);
@@ -72,12 +72,12 @@ namespace WorkoutPlanner.Controllers {
         [HttpDelete(ApiRoutes.Exercise.Delete)]
         public async Task<ActionResult> DeleteExercise([FromRoute] Guid id) {
             var exercise = await _exerciseService.GetExerciseAsync(id);
-            if(exercise == null) return NotFound();
+            if(exercise == null) throw new ExerciseNotFoundError();
 
             var routine = await _routineService.GetRoutineAsync(exercise.RoutineId);
             routine.ExercisesNumber--;
 
-            if(routine == null) return NotFound();
+            if(routine == null) throw new RoutineNotFoundError();
 
             await _routineService.UpdateRoutineAsync(routine);
             await _exerciseService.DeleteExerciseAsync(exercise);
@@ -88,7 +88,7 @@ namespace WorkoutPlanner.Controllers {
         [HttpPatch(ApiRoutes.Exercise.Update)]
         public async Task<ActionResult> UpdateExercise([FromRoute] Guid id, [FromBody] JsonPatchDocument<UpdateExerciseRequest> input) {
             var exercise = await _exerciseService.GetExerciseAsync(id);
-            if(exercise == null) return NotFound();
+            if(exercise == null) throw new ExerciseNotFoundError();
 
             var exerciseToPatch = _mapper.Map<UpdateExerciseRequest>(exercise);
 

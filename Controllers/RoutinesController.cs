@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using WorkoutPlanner.Database.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using WorkoutPlanner.Utils;
+using WorkoutPlanner.Errors;
 
 namespace WorkoutPlanner.Controllers {
 
-    [ApiController]
     public class RoutinesController : ControllerBase {
         private readonly IRoutineService _routineService;
         private readonly IExerciseService _exerciseService;
@@ -29,7 +29,7 @@ namespace WorkoutPlanner.Controllers {
         public async Task<ActionResult> GetRoutine([FromRoute] Guid id) {
             var routine = await _routineService.GetRoutineAsync(id);
 
-            if(routine == null) return NotFound();
+            if(routine == null) throw new RoutineNotFoundError();
 
             var output = _mapper.Map<RoutineResponse>(routine);
 
@@ -63,7 +63,7 @@ namespace WorkoutPlanner.Controllers {
         public async Task<ActionResult> DeleteRoutine([FromRoute] Guid id) {
             var routine = await _routineService.GetRoutineAsync(id);
 
-            if(routine == null) return NotFound();
+            if(routine == null) throw new RoutineNotFoundError();
 
             var exercises = await _exerciseService.GetAllExercisesAsync(id);
 
@@ -80,7 +80,7 @@ namespace WorkoutPlanner.Controllers {
         public async Task<ActionResult> UpdateRoutine([FromRoute] Guid id, [FromBody] JsonPatchDocument<UpdateRoutineRequest> input) {
             var routine = await _routineService.GetRoutineAsync(id);
 
-            if(routine == null) return NotFound();
+            if(routine == null) throw new RoutineNotFoundError();
 
             var routineToPatch = _mapper.Map<UpdateRoutineRequest>(routine);
 
