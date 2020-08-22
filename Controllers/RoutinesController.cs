@@ -15,6 +15,7 @@ using WorkoutPlanner.Errors.Routine;
 
 namespace WorkoutPlanner.Controllers {
 
+    [ApiController]
     public class RoutinesController : ControllerBase {
         private readonly IRoutineService _routineService;
         private readonly IExerciseService _exerciseService;
