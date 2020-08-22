@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>WorkoutPlanner</RootNamespace>
+    <UserSecretsId>8ee1f253-e8cd-4868-919f-1eed8c654efc</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
