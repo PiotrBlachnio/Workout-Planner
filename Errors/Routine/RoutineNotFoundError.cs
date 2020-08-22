@@ -1,4 +1,4 @@
-namespace WorkoutPlanner.Errors {
+namespace WorkoutPlanner.Errors.Routine {
     public class RoutineNotFoundError : GenericError {
         public RoutineNotFoundError() {
             this.Id = 100;

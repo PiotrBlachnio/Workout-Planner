@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using WorkoutPlanner.Database.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using WorkoutPlanner.Utils;
-using WorkoutPlanner.Errors;
 using WorkoutPlanner.Database.Validators;
+using WorkoutPlanner.Errors.Routine;
 
 namespace WorkoutPlanner.Controllers {
 

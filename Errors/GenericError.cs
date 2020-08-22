@@ -3,10 +3,13 @@ using System;
 /**
  * 0 - Internal server error
  * 
+ *? Routine errors
  * 100 - Routine does not exist
- * 101 - Exercise does not exist
- * 102 - Routine's name cannot be empty
- * 103 - Routine's name is too long
+ * 101 - Routine's name cannot be empty
+ * 102 - Routine's name is too long
+ *
+ *? Exercise errors
+ * 200 - Exercise does not exist
  */
  
 namespace WorkoutPlanner.Errors {

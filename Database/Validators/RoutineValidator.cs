@@ -1,6 +1,6 @@
 using FluentValidation;
 using WorkoutPlanner.Database.Models;
-using WorkoutPlanner.Errors;
+using WorkoutPlanner.Errors.Routine;
 
 namespace WorkoutPlanner.Database.Validators {
     public class RoutineValidator : AbstractValidator<Routine> {

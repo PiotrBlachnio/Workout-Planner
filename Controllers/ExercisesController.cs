@@ -8,7 +8,8 @@ using WorkoutPlanner.Contracts;
 using WorkoutPlanner.Contracts.Requests;
 using WorkoutPlanner.Contracts.Responses;
 using WorkoutPlanner.Database.Models;
-using WorkoutPlanner.Errors;
+using WorkoutPlanner.Errors.Exercise;
+using WorkoutPlanner.Errors.Routine;
 using WorkoutPlanner.Services;
 using WorkoutPlanner.Utils;
 
