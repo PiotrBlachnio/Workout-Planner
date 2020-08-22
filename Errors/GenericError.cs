@@ -6,13 +6,19 @@ using System;
  * 
  *? Routine errors
  * 100 - Routine does not exist
- * 101 - Routine's name cannot be empty
- * 102 - Routine's name is too long
+ * 101 - Name property cannot be empty
+ * 102 - Name property cannot be longer than 16 characters
  *
  *? Exercise errors
  * 200 - Exercise does not exist
- * 201 - Exercise's name cannot be empty
- * 202 - Exercise's name is too long
+ * 201 - Name propety cannot be empty
+ * 202 - Name property cannot be longer than 32 characters
+ * 203 - Muscle propety cannot be empty
+ * 204 - Muscle property cannot be longer than 16 characters
+ * 205 - Sets property cannot be less than 1
+ * 206 - Reps property cannot be less than 1
+ * 207 - Additional weight property cannot be less than 0
+ * 208 - Rest time property cannot be less than 0
  */
  
 namespace WorkoutPlanner.Errors {
