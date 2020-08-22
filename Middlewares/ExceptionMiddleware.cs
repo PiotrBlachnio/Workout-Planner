@@ -1,8 +1,7 @@
-using System;
-using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using WorkoutPlanner.Errors;
 
 namespace WorkoutPlanner.Middlewares {
     public class ExceptionMiddleware {
@@ -17,18 +16,19 @@ namespace WorkoutPlanner.Middlewares {
         public async Task InvokeAsync(HttpContext httpContext) {
             try {
                 await _next(httpContext);
-            } catch(Exception ex) {
-                _logger.LogError($"Something went wrong: {ex.Message}");
-                await HandleExceptionAsync(httpContext, ex);
+            } catch(GenericError error) {
+                _logger.LogError($"Something went wrong: {error.Message}");
+                await HandleExceptionAsync(httpContext, error);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception) {
+        private Task HandleExceptionAsync(HttpContext context, GenericError error) {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.Response.StatusCode = (int)error.StatusCode;
 
             return context.Response.WriteAsync(new ErrorDetails() {
-                message = "Internal server error"
+                message = error.Message,
+                id = error.Id
             }.ToString());
         }
     }
