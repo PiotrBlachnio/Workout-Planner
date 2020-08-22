@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http;
+
 namespace WorkoutPlanner.Contracts {
     public static class ApiRoutes {
         private const string Root = "api";
@@ -5,6 +7,10 @@ namespace WorkoutPlanner.Contracts {
         private const string Version = "v1";
 
         private const string Base = Root + "/" + Version;
+
+        public static string GenerateBaseUrl(HttpContext httpContext) {
+            return $"{httpContext.Request.Scheme}://{httpContext.Request.Host.ToUriComponent()}";
+        }
 
         public static class Routine {
             public const string Get = Base + "/routine/{id}";

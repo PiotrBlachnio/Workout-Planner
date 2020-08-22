@@ -63,8 +63,7 @@ namespace WorkoutPlanner.Controllers {
             await _exerciseService.CreateExerciseAsync(exercise);
             var output = _mapper.Map<ExerciseResponse>(exercise);
 
-            var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-            var locationUrl = baseUrl + "/" + ApiRoutes.Exercise.Get.Replace("{id}", exercise.Id.ToString());
+            var locationUrl = ApiRoutes.GenerateBaseUrl(HttpContext) + "/" + ApiRoutes.Exercise.Get.Replace("{id}", exercise.Id.ToString());
 
             return Created(locationUrl, output);
         }
