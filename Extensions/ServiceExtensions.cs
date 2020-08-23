@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using WorkoutPlanner.Database;
 using WorkoutPlanner.Services;
@@ -26,6 +27,15 @@ namespace WorkoutPlanner.Extensions {
         public static void AddServices(this IServiceCollection services) {
             services.AddScoped<IRoutineService, RoutineService>();
             services.AddScoped<IExerciseService, ExerciseService>();
+        }
+
+        public static void ConfigureSwagger(this IServiceCollection services) {
+            services.AddSwaggerGen(x => {
+                x.SwaggerDoc("v1", new OpenApiInfo {
+                    Title = "Workout Planner",
+                    Version = "v1"
+                });
+            });
         }
     }
 }
