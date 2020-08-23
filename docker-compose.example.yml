@@ -4,7 +4,8 @@ services:
     main-api:
         build: .
         environment:
-            DB_CONNECTION_STRING: "Server=db-server;Database=WorkoutPlannerDB;User=sa;Password=Pa55w0rd2019"
+            DB_CONNECTION_STRING: <Connection_String>
+            STAGE: "PRODUCTION"
         restart: always
         ports:
             - "7000:80"
@@ -15,6 +16,6 @@ services:
         container_name: db-server
         environment: 
             - ACCEPT_EULA=Y
-            - MSSQL_SA_PASSWORD=Pa55w0rd2019
+            - MSSQL_SA_PASSWORD=<SA_Password>
         ports:
             - "9433:1433"

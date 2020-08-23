@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WorkoutPlanner.Database;
 using WorkoutPlanner.Extensions;
 using WorkoutPlanner.Middlewares;
 
@@ -43,8 +42,6 @@ namespace WorkoutPlanner
 
             app.ConfigureSwaggerUI(Configuration);
 
-            PrepareDatabase.PrepPopulation(app);
-            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

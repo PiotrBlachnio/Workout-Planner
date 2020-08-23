@@ -11,7 +11,12 @@ using WorkoutPlanner.Services;
 namespace WorkoutPlanner.Extensions {
     public static class ServiceExtensions {
         public static void ConfigureDatabase(this IServiceCollection services, IConfiguration configuration) {
-            services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
+            string connectionString;
+
+            if(Environment.GetEnvironmentVariable("STAGE") == "PRODUCTION") connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            else connectionString = configuration.GetConnectionString("DB_CONNECTION_STRING");
+
+            services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(connectionString));
         }
 
         public static void ConfigureAutoMapper(this IServiceCollection services) {
