@@ -28,6 +28,11 @@ namespace WorkoutPlanner.Controllers {
             _mapper = mapper;
         }
 
+        [HttpGet("/")]
+        public ActionResult Default() {
+            return Ok("Welcome in Workout Planner API. Documentation is available at http://ec2-3-92-200-108.compute-1.amazonaws.com/swagger/index.html");
+        }
+
         [HttpGet(ApiRoutes.Exercise.Get)]
         public async Task<ActionResult> GetExercise([FromRoute] Guid id) {
             var exercise = await _exerciseService.GetExerciseAsync(id);
