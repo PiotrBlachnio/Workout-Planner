@@ -2,3 +2,4 @@ obj/
 bin/
 .vscode/
 docker-compose.yml
+Dockerfile
