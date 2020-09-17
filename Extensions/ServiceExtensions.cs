@@ -16,8 +16,6 @@ namespace WorkoutPlanner.Extensions {
             if(Environment.GetEnvironmentVariable("STAGE") == "PRODUCTION") connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
             else connectionString = configuration.GetConnectionString("DB_CONNECTION_STRING");
 
-            connectionString = "Server=workout-planner.cr69up9qtzgb.us-east-1.rds.amazonaws.com,1433;Database=WorkoutPlannerDB;User=admin;Password=D85kgYjiOasiyorPJ0ZM;";
-
             services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(connectionString));
         }
 
