@@ -54,8 +54,3 @@ dotnet run
 1. Commit your changes (git commit -am 'Add some fooBar')
 1. Push to the branch (git push origin feature/fooBar)
 1. Create a new Pull Request
-
-## Check it by yourself
-[API Documentation](http://ec2-3-92-200-108.compute-1.amazonaws.com/swagger/index.html)
-
-[AWS](http://ec2-3-92-200-108.compute-1.amazonaws.com/)
