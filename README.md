@@ -34,7 +34,7 @@ docker-compose up
 ****
 
 ```
-git clone https://github.com/PiotrBlachnio/Workout-Planner.git
+git clone https://github.com/PiotrBlachnio/WorkoutAPI.git
 ```
 
 ```
