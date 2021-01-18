@@ -13,11 +13,11 @@ REST API that allows you to create your workout routines and assign different ex
 
 ****
 ```
-git clone https://github.com/PiotrBlachnio/Workout-Planner.git
+git clone https://github.com/PiotrBlachnio/WorkoutAPI.git
 ```
 
 ```
-cd Workout-Planner/
+cd WorkoutAPI/
 ```
 
 ```
@@ -38,7 +38,7 @@ git clone https://github.com/PiotrBlachnio/Workout-Planner.git
 ```
 
 ```
-cd Workout-Planner/
+cd WorkoutAPI/
 ```
 
 ```
@@ -50,7 +50,7 @@ dotnet run
 ```
 
 ## Contributing
-1. Fork it (https://github.com/PiotrBlachnio/Workout-Planner/fork)
+1. Fork it (https://github.com/PiotrBlachnio/WorkoutAPI/fork)
 1. Create your feature branch (git checkout -b feature/fooBar)
 1. Commit your changes (git commit -am 'Add some fooBar')
 1. Push to the branch (git push origin feature/fooBar)
