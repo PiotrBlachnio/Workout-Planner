@@ -1,10 +1,11 @@
 # Workout Planner
-REST API created using .NET Core framework. It allows you to create your workout routines and assign exercises to it. Exercise itself it's fully editable, so you can change almost everything by yourself. You can assign a name, type of muscle, numbers of sets and reps, additional weight, set rest time and even create personal notes.
+REST API that allows you to create your workout routines and assign different exercises to them. Exercise is fully editable, so you can adjust it to yourself. You can assign a name, type of muscle, numbers of sets and reps, additional weight, set rest time and even create personal notes.
 
 ## Technologies used
 * C#
 * .NET Core
 * MSSQL Database
+* Docker
 
 ## Running on docker
 ****
